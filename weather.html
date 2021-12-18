@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="weather.css">
+
+<title>weather widget</title>
+
+<body>
+
+    <!--use html syntax given on module wiki page-->
+    <div class="weather" id="weatherWidget">
+        <div class="weather-loc"></div>
+        <div class="weather-humidity"></div>
+        <div class="weather-temp"></div>
+        <img class="weather-tomorrow" />
+        <img class="weather-dayaftertomorrow" />
+    </div>
+
+    <script>
+    //define function fetchWeather to fetch weather data from the json file    
+    function fetchWeather(){
+        //define path to data
+        let path_to_php_file = "https://classes.engineering.wustl.edu/cse330/content/weather_json.php";
+        fetch(path_to_php_file, {
+            method: "POST",
+        })
+        .then(res => res.json())
+        .then(data => ajaxCallback(data))
+        .catch(error => console.error('Error:',error))
+    }
+
+    function ajaxCallback(data){
+        //get relevant values
+        let city = data.location.city + ' ';
+        let state = data.location.state;
+        let humidity = data.atmosphere.humidity;
+        let current_temp = data.current.temp;
+
+        //create image source by getting image code, then inserting code into appropriate location of yahoo images url from wiki
+        let image_tmrw_code = data.tomorrow.code;
+        let tomorrow_image_source = ('http://us.yimg.com/i/us/nws/weather/gr/' + image_tmrw_code + 'ds.png');
+
+        let image_dayafter_code = data.dayafter.code;
+        let dayafter_image_source = ('http://us.yimg.com/i/us/nws/weather/gr/' + image_dayafter_code + 'ds.png');
+
+        
+        //create new paragraph tag for city
+        let city_element = document.createElement("STRONG");
+        //set city element content to city
+        city_element.textContent = (city);
+        city_element.setAttribute("class","city_value");
+        //append element to weather-loc div within weatherwidget
+        document.getElementById("weatherWidget").getElementsByClassName("weather-loc")[0].appendChild(city_element);
+
+        //update state data- for these next few values I'm not adding an element, so I only need to create and append a text node
+        let state_element = document.createTextNode(state);
+        document.getElementById("weatherWidget").getElementsByClassName("weather-loc")[0].appendChild(state_element);        
+
+        //update humidity data
+        let humidity_element = document.createTextNode(humidity);
+        document.getElementById("weatherWidget").getElementsByClassName("weather-humidity")[0].appendChild(humidity_element);
+
+        //update current temp data
+        let current_temp_element = document.createTextNode(current_temp);
+        document.getElementById("weatherWidget").getElementsByClassName("weather-temp")[0].appendChild(current_temp_element);
+
+        //update weather-tomorrow image data
+        let weather_tomorrow_element = document.createElement("IMG");
+        weather_tomorrow_element.setAttribute("src",tomorrow_image_source);
+        document.getElementById("weatherWidget").appendChild(weather_tomorrow_element);
+
+        //update weather-dayaftertomorrow image data
+        let weather_dayaftertomorrow_element = document.createElement("IMG");
+        weather_dayaftertomorrow_element.setAttribute("src",dayafter_image_source);
+        document.getElementById("weatherWidget").appendChild(weather_dayaftertomorrow_element);
+    }
+
+    fetchWeather();
+    </script>
+
+</body>
+</html>
