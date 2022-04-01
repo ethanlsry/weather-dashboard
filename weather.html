@@ -1,81 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="weather.css">
+<script type="module" src="Weather.js"></script>
 
 <title>weather widget</title>
 
+
+<head>
+<meta charset="utf-8">
+<!--embed mapbox map (via Mapbox documentation)-->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+
+<!--embed mapbox geocoder (via Mapbox documentation)-->
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+</head>
+
+
 <body>
-
-    <!--use html syntax given on module wiki page-->
-    <div class="weather" id="weatherWidget">
-        <div class="weather-loc"></div>
-        <div class="weather-humidity"></div>
-        <div class="weather-temp"></div>
-        <img class="weather-tomorrow" />
-        <img class="weather-dayaftertomorrow" />
+<!--section for selecting location-->
+<div id="select_location">
+    <div id="select_location_text">
+        <h3>select location below:</h3>
     </div>
+    <div id="map"></div>
+    
+</div>
 
-    <script>
-    //define function fetchWeather to fetch weather data from the json file    
-    function fetchWeather(){
-        //define path to data
-        let path_to_php_file = "https://classes.engineering.wustl.edu/cse330/content/weather_json.php";
-        fetch(path_to_php_file, {
-            method: "POST",
-        })
-        .then(res => res.json())
-        .then(data => ajaxCallback(data))
-        .catch(error => console.error('Error:',error))
-    }
 
-    function ajaxCallback(data){
-        //get relevant values
-        let city = data.location.city + ' ';
-        let state = data.location.state;
-        let humidity = data.atmosphere.humidity;
-        let current_temp = data.current.temp;
-
-        //create image source by getting image code, then inserting code into appropriate location of yahoo images url from wiki
-        let image_tmrw_code = data.tomorrow.code;
-        let tomorrow_image_source = ('http://us.yimg.com/i/us/nws/weather/gr/' + image_tmrw_code + 'ds.png');
-
-        let image_dayafter_code = data.dayafter.code;
-        let dayafter_image_source = ('http://us.yimg.com/i/us/nws/weather/gr/' + image_dayafter_code + 'ds.png');
-
-        
-        //create new paragraph tag for city
-        let city_element = document.createElement("STRONG");
-        //set city element content to city
-        city_element.textContent = (city);
-        city_element.setAttribute("class","city_value");
-        //append element to weather-loc div within weatherwidget
-        document.getElementById("weatherWidget").getElementsByClassName("weather-loc")[0].appendChild(city_element);
-
-        //update state data- for these next few values I'm not adding an element, so I only need to create and append a text node
-        let state_element = document.createTextNode(state);
-        document.getElementById("weatherWidget").getElementsByClassName("weather-loc")[0].appendChild(state_element);        
-
-        //update humidity data
-        let humidity_element = document.createTextNode(humidity);
-        document.getElementById("weatherWidget").getElementsByClassName("weather-humidity")[0].appendChild(humidity_element);
-
-        //update current temp data
-        let current_temp_element = document.createTextNode(current_temp);
-        document.getElementById("weatherWidget").getElementsByClassName("weather-temp")[0].appendChild(current_temp_element);
-
-        //update weather-tomorrow image data
-        let weather_tomorrow_element = document.createElement("IMG");
-        weather_tomorrow_element.setAttribute("src",tomorrow_image_source);
-        document.getElementById("weatherWidget").appendChild(weather_tomorrow_element);
-
-        //update weather-dayaftertomorrow image data
-        let weather_dayaftertomorrow_element = document.createElement("IMG");
-        weather_dayaftertomorrow_element.setAttribute("src",dayafter_image_source);
-        document.getElementById("weatherWidget").appendChild(weather_dayaftertomorrow_element);
-    }
-
-    fetchWeather();
-    </script>
+<!--section for displaying weather-->
+<div id="display_weather">
+    <h5 id="location" class="weather_info">location: </h5>
+    <h5 id="actual_temp" class="weather_info">current temp: </h5>
+    <h5 id="wind_speed" class="weather_info">wind speed: </h5>
+    <h5 id="max_temp" class="weather_info">high: </h5>
+    <h5 id="min_temp" class="weather_info">low: </h5>
+    <h5 id="sunrise" class="weather_info">sunrise: </h5>
+    <h5 id="sunset" class="weather_info">sunset: </h5>
+</div>
 
 </body>
 </html>
