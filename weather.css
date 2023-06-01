@@ -9,15 +9,14 @@ html,body {
 
 /*css for left side: select location via map*/
 #select_location{
-    /* border: 1px blue dotted; */
     height: 100%;
     float: left;
     width: 55%;
 }
 
 #select_location_text{
-    /* border: 1px blue dotted; */
     width: 100%;
+    padding-left: 15%;
     text-align: center;
     margin-top: 15%;
     font-weight: 200;
@@ -28,23 +27,19 @@ html,body {
 #map{
     height: 60%;
     width: 90%;
-    /* border: 1px grey dotted; */
-    margin-left: 5%;
+    margin-left: 20%;
 }
 
 
 /*css for right side: display weather*/
 #display_weather{
-    padding-top: 9%;
-    /* border: 1px aqua dotted; */
-    height: 100%;
+    transform: translate(20%, 20%);
     float: right;
     width: 44%;
     font-style: italic;
 }
 
 .weather_info{
-    /* border: 1px maroon dotted; */
     font-size: 1.8em;
     font-weight: 200;
     font-style: bold;
