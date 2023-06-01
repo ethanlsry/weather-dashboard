@@ -6,6 +6,10 @@ html,body {
     color: 	#f5f5f5b9;
 }
 
+#content{
+    height: 90%;
+}
+
 
 /*css for left side: select location via map*/
 #select_location{
@@ -21,7 +25,6 @@ html,body {
     margin-top: 15%;
     font-weight: 200;
     font-size: 2em;
-
 }
 
 #map{
@@ -33,14 +36,29 @@ html,body {
 
 /*css for right side: display weather*/
 #display_weather{
-    transform: translate(20%, 20%);
-    float: right;
+    float: left;
+    margin-left: 8%;
+    margin-top: 7%;
     width: 44%;
     font-style: italic;
+    width: auto;
 }
 
 .weather_info{
     font-size: 1.8em;
     font-weight: 200;
     font-style: bold;
+}
+
+#sc_link{
+    margin-left: 45%;
+    font-size: large;
+    font-style: italic;
+    font-weight: bold;
+    width: fit-content;
+}
+
+#sc_link_text{
+    text-decoration: none;
+    color: #f5f5f5b9;
 }

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="weather.css">
-<link rel="icon" href="https://i.scdn.co/image/ab67616d0000b273fae944bd93dd1e47591a0df9">
 <script type="module" src="Weather.js"></script>
 
 <title>weather tool</title>
@@ -19,8 +18,9 @@
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
 </head>
 
-
 <body>
+
+<div id="content">
 <!--section for selecting location-->
 <div id="select_location">
     <div id="select_location_text">
@@ -40,6 +40,11 @@
     <h5 id="min_temp" class="weather_info">min temp: </h5>
     <h5 id="sunrise" class="weather_info">sunrise: </h5>
     <h5 id="sunset" class="weather_info">sunset: </h5>
+</div>
+</div>
+
+<div id="sc_link">
+    <a id = "sc_link_text" href="https://github.com/ethanlsry/Weather_Widget" target="_blank">source code link</a>
 </div>
 
 </body>

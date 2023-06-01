@@ -180,42 +180,9 @@ document.addEventListener("DOMContentLoaded", function(){
           min_temp_text.textContent = "min temp: " + min_temp.toFixed(1) + temp_units;
 
           let sunrise_text = document.getElementById("sunrise");
-          sunrise_text.textContent = "sunrise: " + convert_UNIX_epoch_to_time(sunrise);
+          sunrise_text.textContent = "sunrise: " + convert_UNIX_epoch_to_time(sunrise) + " EST";
 
           let sunset_text = document.getElementById("sunset");
-          sunset_text.textContent = "sunset: " + convert_UNIX_epoch_to_time(sunset);
+          sunset_text.textContent = "sunset: " + convert_UNIX_epoch_to_time(sunset) + ' EST';
     }
-
-
-
-    // export default class Weather extends React.Component{
-    //     constructor(props){
-    //         super(props);
-    //         this.state = {
-    //             lat: null,
-    //             long: null,
-    //         };
-
-    //         //bind all methods
-    //         this.method = this.method.bind(this)
-    //     }
-
-    //     render(){
-    //         return (
-    //             <div>
-    //                 <label>Latitude?</label>
-    //                 <input type="number"></input>
-    //                 <label>Latitude?</label>
-    //                 <input type="number"></input>
-    //                 <button type="submit"></button>
-    //             </div>
-    //         );
-    //     }
-    // }
-
-    //add way to select location
-    //radio butter
-
-
-//finish off DOMContentLoaded event listener
 }, false);
